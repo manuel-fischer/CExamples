@@ -10,23 +10,36 @@ else
 	DLL = .so
 endif
 
-INCLUDE_PATHS = \
-	-IC:\\Libs\\include \
-	-LC:\\Libs\\lib
+ifeq ($(OS),Windows_NT)
+	INCLUDE_PATHS = \
+		-IC:\\Libs\\include \
+		-LC:\\Libs\\lib
+else
+	INCLUDE_PATHS =
+endif
 
-LINK_LIBRARIES = \
-	-lmingw32 \
-	-luser32 \
-	-lgdi32 \
-	-lwinmm \
-	-ldxguid \
-	-lglew32 \
-	-lSDL2main \
-	-lSDL2 \
-	-lSDL2_image \
-	-lSDL2_ttf \
-	-lopengl32 \
-    -limagehlp
+ifeq ($(OS),Windows_NT)
+	LINK_LIBRARIES = \
+		-lmingw32 \
+		-luser32 \
+		-lgdi32 \
+		-lwinmm \
+		-ldxguid \
+		-lglew32 \
+		-lSDL2main \
+		-lSDL2 \
+		-lSDL2_image \
+		-lSDL2_ttf \
+		-lopengl32 \
+		-limagehlp
+else
+	LINK_LIBRARIES = \
+		-lSDL2main \
+		-lSDL2 \
+		-lSDL2_image \
+		-lSDL2_ttf
+endif
+	
 
 all: main$(EXE) some_lib$(DLL) legacy_lib$(DLL)
 
