@@ -1,0 +1,5 @@
+# All the libraries to load are listed here
+# by their name without an extension.
+some_lib
+legacy_lib
+non_existent_lib
